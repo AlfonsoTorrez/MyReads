@@ -2,6 +2,14 @@ import React from 'react'
 
 class ShelfOptions extends React.Component{
 
+  state = {
+    shelfType: '',
+  }
+
+  componentDidMount(){
+    console.log(this.props.shelfType)
+  }
+
   render(){
     return(
       <div className="book-shelf-changer">

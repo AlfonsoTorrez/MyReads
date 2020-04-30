@@ -1,6 +1,7 @@
 import React from 'react'
 import ShelfOptions from './ShelfOptions'
 
+const shelfType = "Want";
 
 class WantToRead extends React.Component{
   state = {
@@ -30,7 +31,7 @@ class WantToRead extends React.Component{
                 <div className="book">
                   <div className="book-top">
                     <img className="book-cover" src={book.image} alt={book.title}/>
-                    <ShelfOptions />
+                    <ShelfOptions shelfType={shelfType}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   <div className="book-authors">{book.author}</div>
