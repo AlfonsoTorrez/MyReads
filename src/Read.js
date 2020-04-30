@@ -28,7 +28,7 @@ class Read extends React.Component{
     return(
 
       <div className="bookshelf">
-        <h2 className="bookshelf-title">TODO:: Read</h2>
+        <h2 className="bookshelf-title">Read</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
           {
