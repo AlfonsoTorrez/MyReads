@@ -21,21 +21,25 @@ class Reading extends React.Component{
   }
 
   render(){
+    const books = this.props.books.filter(book =>
+    book.shelf === "currentlyReading" )
+
+
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {
-              this.state.books.map((book) => (
+              books.map((book) => (
                 <li key={book.title}>
                   <div className="book">
                     <div className="book-top">
-                      <img className="book-cover" src={book.image} alt={book.title}/>
-                      <ShelfOptions shelfType={book.shelfType}/>
+                      <img className="book-cover" src={book.imageLinks.thumbnail} alt={book.title}/>
+                      <ShelfOptions shelfType={book.shelf}/>
                     </div>
                     <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.author}</div>
+                    <div className="book-authors">{book.authors[0]}</div>
                   </div>
                 </li>
               ))

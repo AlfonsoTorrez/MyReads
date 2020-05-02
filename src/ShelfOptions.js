@@ -14,7 +14,7 @@ class ShelfOptions extends React.Component{
 
   renderSwitch(){
     switch(this.state.shelfType){
-      case 'Reading':
+      case 'currentlyReading':
         return (
           <div className="book-shelf-changer">
             <select value="currentlyReading">
@@ -26,7 +26,7 @@ class ShelfOptions extends React.Component{
             </select>
           </div>
         )
-      case 'Want':
+      case 'wantToRead':
         return (
           <div className="book-shelf-changer">
             <select value="wantToRead">
@@ -38,7 +38,7 @@ class ShelfOptions extends React.Component{
             </select>
           </div>
         )
-      case 'Read':
+      case 'read':
         return (
           <div className="book-shelf-changer">
             <select value="read">

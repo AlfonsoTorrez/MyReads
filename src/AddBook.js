@@ -1,15 +1,27 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import serializeForm from 'form-serialize'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 
 class AddBook extends React.Component{
+
+  state = {
+    books: {}
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
     const value = serializeForm(e.target, { hash: true })
-    console.log("You search for:")
-    console.log(value.search)
+    // console.log("You search for:")
+    // console.log(value.search)
+
+    BooksAPI.getAll()
+      .then((books) => {
+        //åconsole.log(books)
+        // this.setState(() => ({
+        //   books
+        // }))
+      })
   }
 
   render(){
