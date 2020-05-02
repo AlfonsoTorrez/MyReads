@@ -7,7 +7,7 @@ class Read extends React.Component{
   render(){
     const books = this.props.books.filter(book =>
     book.shelf === "read" )
-
+    
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">Read</h2>
