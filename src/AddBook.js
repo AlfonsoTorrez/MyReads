@@ -2,27 +2,27 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import * as BooksAPI from './BooksAPI'
+import SearchDisplay from './SearchDisplay'
 
 class AddBook extends React.Component{
 
   state = {
-    books: {}
+    books: []
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
     const value = serializeForm(e.target, { hash: true })
-    // console.log("You search for:")
-    // console.log(value.search)
 
-    BooksAPI.getAll()
+    BooksAPI.search(value.search)
       .then((books) => {
-        //åconsole.log(books)
-        // this.setState(() => ({
-        //   books
-        // }))
+        this.setState(() => ({
+          books
+        }))
       })
   }
+
+
 
   render(){
     return(
@@ -45,9 +45,7 @@ class AddBook extends React.Component{
             </div>
           </form>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid"></ol>
-        </div>
+          <SearchDisplay books={this.state.books}/>
       </div>
     )
   }
