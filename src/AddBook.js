@@ -9,7 +9,7 @@ class AddBook extends React.Component{
 
   state = {
     books: [],
-    empty: false
+    empty: true
   }
 
   handleSubmit = (e) => {
@@ -17,6 +17,7 @@ class AddBook extends React.Component{
     const value = serializeForm(e.target, { hash: true })
     BooksAPI.search(value.search)
       .then((books) => {
+        console.log(books)
           if(books.error === "empty query"){
             this.setState(() => ({
               empty: true
@@ -28,7 +29,7 @@ class AddBook extends React.Component{
             )
             this.setState(() => ({
               books,
-              empty:false
+              empty:false,
             }))
           }
         })
