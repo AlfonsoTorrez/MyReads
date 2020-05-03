@@ -3,11 +3,13 @@ import {Link} from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import * as BooksAPI from './BooksAPI'
 import SearchDisplay from './SearchDisplay'
+import { UncontrolledAlert } from 'reactstrap';
 
 class AddBook extends React.Component{
 
   state = {
-    books: []
+    books: [],
+    empty: false
   }
 
   handleSubmit = (e) => {
@@ -15,12 +17,20 @@ class AddBook extends React.Component{
     const value = serializeForm(e.target, { hash: true })
     BooksAPI.search(value.search)
       .then((books) => {
-          books.forEach((book) =>
-            book.shelf = "none"
-          )
-          this.setState(() => ({
-            books
-          }))
+          if(books.error === "empty query"){
+            this.setState(() => ({
+              empty: true
+            }))
+          }
+          else{
+            books.forEach((book) =>
+              book.shelf = "none"
+            )
+            this.setState(() => ({
+              books,
+              empty:false
+            }))
+          }
         })
   }
 
@@ -41,7 +51,15 @@ class AddBook extends React.Component{
             </div>
           </form>
         </div>
-          <SearchDisplay books={this.state.books} updateBooks={this.updateBooks}/>
+        {
+          this.state.empty ?
+              <div className="search-books-results">
+                <UncontrolledAlert color="danger">
+                  No books found with that keyword
+                </UncontrolledAlert>
+              </div>
+            : <SearchDisplay books={this.state.books} updateBooks={this.updateBooks}/>
+        }
       </div>
     )
   }
