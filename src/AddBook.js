@@ -13,16 +13,20 @@ class AddBook extends React.Component{
   handleSubmit = (e) => {
     e.preventDefault()
     const value = serializeForm(e.target, { hash: true })
-
     BooksAPI.search(value.search)
       .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
+          books.forEach((book) =>
+            book.shelf = "none"
+          )
+          this.setState(() => ({
+            books
+          }))
+        })
   }
 
-
+  updateBooks = (book,shelf) => {
+    BooksAPI.update(book,shelf)
+  }
 
   render(){
     return(
@@ -33,19 +37,11 @@ class AddBook extends React.Component{
           </Link>
           <form onSubmit={this.handleSubmit}>
             <div className="search-books-input-wrapper">
-              {/*
-                NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                You can find these search terms here:
-                https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                you don't find a specific author or title. Every search is limited by search terms.
-              */}
               <input type="text" name='search' placeholder="Search by Genre"/>
             </div>
           </form>
         </div>
-          <SearchDisplay books={this.state.books}/>
+          <SearchDisplay books={this.state.books} updateBooks={this.updateBooks}/>
       </div>
     )
   }

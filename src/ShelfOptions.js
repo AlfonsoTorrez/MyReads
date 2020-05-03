@@ -4,20 +4,29 @@ class ShelfOptions extends React.Component{
 
   state = {
     shelfType: '',
+    book: {},
   }
 
   componentDidMount(){
     this.setState(() => ({
-      shelfType: this.props.shelfType
+      shelfType: this.props.shelf
     }))
   }
 
+  handleChange = (e) => {
+    e.preventDefault()
+    const value = e.target.value
+    const {book,updateBooks} = this.props
+    updateBooks(book,value)
+  }
+
   renderSwitch(){
+
     switch(this.state.shelfType){
       case 'currentlyReading':
         return (
-          <div className="book-shelf-changer">
-            <select value="currentlyReading">
+          <div className="book-shelf-changer" >
+            <select value="currentlyReading" onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -29,7 +38,7 @@ class ShelfOptions extends React.Component{
       case 'wantToRead':
         return (
           <div className="book-shelf-changer">
-            <select value="wantToRead">
+            <select value="wantToRead" onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -41,7 +50,7 @@ class ShelfOptions extends React.Component{
       case 'read':
         return (
           <div className="book-shelf-changer">
-            <select value="read">
+            <select value="read" onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -53,7 +62,7 @@ class ShelfOptions extends React.Component{
       default:
         return (
           <div className="book-shelf-changer">
-            <select defaultValue="none">
+            <select defaultValue="move" onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

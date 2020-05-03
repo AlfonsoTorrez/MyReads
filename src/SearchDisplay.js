@@ -3,14 +3,8 @@ import ShelfOptions from './ShelfOptions'
 
 class SearchDisplay extends React.Component{
 
-  componentDidMount() {
-    this.props.books.map((book) => (
-      book.shelf = 'none'
-    ))
-  }
-
   render(){
-    const books = this.props.books
+    const { books,updateBooks } = this.props
 
     return(
       <div className="search-books-results">
@@ -21,7 +15,7 @@ class SearchDisplay extends React.Component{
               <div className="book">
                 <div className="book-top">
                   <img className="book-cover" src={book.imageLinks.thumbnail} alt={book.title}/>
-                  <ShelfOptions shelfType={book.shelf}/>
+                  <ShelfOptions book={book} shelfType="none" updateBooks={updateBooks}/>
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors[0]}</div>
