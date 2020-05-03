@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import * as BooksAPI from './BooksAPI'
 import SearchDisplay from './SearchDisplay'
-import { UncontrolledAlert } from 'reactstrap';
+//import { UncontrolledAlert } from 'reactstrap';
 
 class AddBook extends React.Component{
 
@@ -38,6 +38,11 @@ class AddBook extends React.Component{
     BooksAPI.update(book,shelf)
   }
 
+  //TODO:: Work on Alert
+  // <UncontrolledAlert color="danger">
+  //   No books found with that keyword
+  // </UncontrolledAlert>
+
   render(){
     return(
       <div className="search-books">
@@ -53,10 +58,7 @@ class AddBook extends React.Component{
         </div>
         {
           this.state.empty ?
-              <div className="search-books-results">
-                <UncontrolledAlert color="danger">
-                  No books found with that keyword
-                </UncontrolledAlert>
+              <div>
               </div>
             : <SearchDisplay books={this.state.books} updateBooks={this.updateBooks}/>
         }
