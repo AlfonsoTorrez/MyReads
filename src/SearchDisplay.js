@@ -2,9 +2,20 @@ import React from 'react'
 import ShelfOptions from './ShelfOptions'
 
 class SearchDisplay extends React.Component{
+  checkUndefined(book){
+    if(typeof book.imageLinks === 'undefined'){
+      book.imageLinks = {thumbnail: "https://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"}
+    }
+    if(typeof book.authors === 'undefined'){
+      book.authors = ["Unknown"]
+    }
+  }
 
   render(){
     const { books,updateBooks } = this.props
+    books.map((book) => (
+      this.checkUndefined(book)
+    ))
 
     return(
       <div className="search-books-results">
