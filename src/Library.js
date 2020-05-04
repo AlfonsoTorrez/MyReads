@@ -13,10 +13,21 @@ class Library extends React.Component{
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
+        console.log(books)
         this.setState(() => ({
           books
         }))
       })
+  }
+
+  checkUndefined(book){
+    if(typeof book.imageLinks === 'undefined'){
+      book.imageLinks = {thumbnail: "https://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"}
+    }
+    if(typeof book.authors === 'undefined'){
+      book.authors = ["Unknown"]
+    }
+    return book
   }
 
   render(){
@@ -26,9 +37,9 @@ class Library extends React.Component{
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <Reading books={this.state.books}/>
-          <WantToRead books={this.state.books}/>
-          <Read books={this.state.books}/>
+          <Reading books={this.state.books} checkUndefined={this.checkUndefined}/>
+          <WantToRead books={this.state.books} checkUndefined={this.checkUndefined}/>
+          <Read books={this.state.books} checkUndefined={this.checkUndefined}/>
         </div>
         <Link
           className="open-search"

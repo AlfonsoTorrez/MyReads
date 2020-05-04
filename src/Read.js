@@ -5,9 +5,12 @@ import ShelfOptions from './ShelfOptions'
 class Read extends React.Component{
 
   render(){
+    const checkUndefined = this.props.checkUndefined
     const books = this.props.books.filter(book =>
-    book.shelf === "read" )
-    
+    book.shelf === "read" ).map((book) => (
+      checkUndefined(book)
+    ))
+
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">Read</h2>
