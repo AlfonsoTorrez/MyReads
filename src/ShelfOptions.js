@@ -9,7 +9,7 @@ class ShelfOptions extends React.Component{
 
   componentDidMount(){
     this.setState(() => ({
-      shelfType: this.props.shelf
+      shelfType: this.props.shelfType
     }))
   }
 
@@ -21,7 +21,6 @@ class ShelfOptions extends React.Component{
   }
 
   renderSwitch(){
-
     switch(this.state.shelfType){
       case 'currentlyReading':
         return (

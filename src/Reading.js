@@ -7,8 +7,7 @@ class Reading extends React.Component{
   render(){
     const checkUndefined = this.props.checkUndefined
     const books = this.props.books.filter(book =>
-    book.shelf === "currentlyReading" )
-    books.map((book) => (
+    book.shelf === "currentlyReading" ).map((book) => (
       checkUndefined(book)
     ))
 
