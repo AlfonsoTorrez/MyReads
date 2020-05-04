@@ -9,7 +9,7 @@ class AddBook extends React.Component{
 
   state = {
     books: [],
-    empty: true
+    emptyQuery: true
   }
 
   handleSubmit = (e) => {
@@ -18,9 +18,9 @@ class AddBook extends React.Component{
     BooksAPI.search(value.search)
       .then((books) => {
         console.log(books)
-          if(books.error === "empty query"){
+          if(typeof books === 'undefined' || books.error === "empty query"){
             this.setState(() => ({
-              empty: true
+              emptyQuery: true
             }))
           }
           else{
@@ -29,7 +29,7 @@ class AddBook extends React.Component{
             )
             this.setState(() => ({
               books,
-              empty:false,
+              emptyQuery:false,
             }))
           }
         })
