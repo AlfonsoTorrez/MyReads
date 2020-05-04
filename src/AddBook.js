@@ -11,7 +11,7 @@ class AddBook extends React.Component{
     books: [],
     emptyQuery: true
   }
-
+  //Show search results if query is correct
   handleSubmit = (e) => {
     e.preventDefault()
     const value = serializeForm(e.target, { hash: true })
@@ -20,7 +20,8 @@ class AddBook extends React.Component{
         console.log(books)
           if(typeof books === 'undefined' || books.error === "empty query"){
             this.setState(() => ({
-              emptyQuery: true
+              emptyQuery: true,
+              books: []
             }))
           }
           else{
@@ -33,6 +34,15 @@ class AddBook extends React.Component{
             }))
           }
         })
+  }
+  //Remove search display if input becomes empty
+  emptySearch = (e) => {
+    if(e.target.value === ''){
+      this.setState(() => ({
+        emptyQuery: true,
+        books: []
+      }))
+    }
   }
 
   updateBooks = (book,shelf) => {
@@ -51,7 +61,7 @@ class AddBook extends React.Component{
           <Link className="close-search" to='/'>
             Close
           </Link>
-          <form onSubmit={this.handleSubmit}>
+          <form onChange={this.emptySearch} onSubmit={this.handleSubmit}>
             <div className="search-books-input-wrapper">
               <input type="text" name='search' placeholder="Search by Genre"/>
             </div>
