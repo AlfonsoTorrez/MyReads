@@ -31,13 +31,14 @@ class Library extends React.Component{
   }
 
   updateBooks = (book,shelf) => {
-    BooksAPI.update(book,shelf)
-    BooksAPI.getAll()
+    BooksAPI.update(book,shelf).then(_ => {
+      BooksAPI.getAll()
       .then((books) => {
         this.setState(() => ({
           books
         }))
       })
+    })
   }
 
   render(){
