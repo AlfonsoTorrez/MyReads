@@ -2,7 +2,6 @@ import React from 'react'
 import Library from './Library.js'
 import AddBook from './AddBook.js'
 import {Route} from 'react-router-dom'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
