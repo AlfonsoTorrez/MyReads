@@ -18,7 +18,6 @@ class AddBook extends React.Component{
     const value = serializeForm(e.target, { hash: true })
     BooksAPI.search(value.search)
       .then((books) => {
-        //console.log(books)
           if(typeof books === 'undefined' || books.error === "empty query"){
             this.setState(() => ({
               emptyQuery: true,
@@ -26,9 +25,6 @@ class AddBook extends React.Component{
             }))
           }
           else{
-            books.forEach((book) =>
-              book.shelf = "none"
-            )
             this.setState(() => ({
               books,
               emptyQuery:false,
