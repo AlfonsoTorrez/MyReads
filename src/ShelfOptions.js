@@ -1,16 +1,18 @@
 import React from 'react'
-
+import * as BooksAPI from './BooksAPI'
 class ShelfOptions extends React.Component{
 
   state = {
     shelfType: '',
-    book: {},
   }
 
   componentDidMount(){
-    this.setState(() => ({
-      shelfType: this.props.shelfType
-    }))
+    BooksAPI.get(this.props.book.id)
+      .then((book) => {
+        this.setState(() => ({
+          shelfType: book.shelf
+        }))
+      })
   }
 
   handleChange = (e) => {
@@ -18,6 +20,9 @@ class ShelfOptions extends React.Component{
     const value = e.target.value
     const {book,updateBooks} = this.props
     updateBooks(book,value)
+    this.setState(() => ({
+      shelfType: value
+    }))
   }
 
   renderSwitch(){
@@ -61,7 +66,7 @@ class ShelfOptions extends React.Component{
       default:
         return (
           <div className="book-shelf-changer">
-            <select defaultValue="move" onChange={this.handleChange}>
+            <select defaultValue="none" onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

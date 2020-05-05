@@ -1,11 +1,10 @@
 import React from 'react'
 import ShelfOptions from './ShelfOptions.js'
 
-
 class Reading extends React.Component{
 
   render(){
-    const checkUndefined = this.props.checkUndefined
+    const {checkUndefined, updateBooks} = this.props
     const books = this.props.books.filter(book =>
     book.shelf === "currentlyReading" ).map((book) => (
       checkUndefined(book)
@@ -22,7 +21,7 @@ class Reading extends React.Component{
                   <div className="book">
                     <div className="book-top">
                       <img className="book-cover" src={book.imageLinks.thumbnail} alt={book.title}/>
-                      <ShelfOptions shelfType={book.shelf}/>
+                      <ShelfOptions book={book} shelfType={book.shelf} updateBooks={updateBooks}/>
                     </div>
                     <div className="book-title">{book.title}</div>
                     <div className="book-authors">{book.authors[0]}</div>

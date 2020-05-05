@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
 class Library extends React.Component{
+
   state = {
     books: []
   }
@@ -13,7 +14,6 @@ class Library extends React.Component{
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        console.log(books)
         this.setState(() => ({
           books
         }))
@@ -30,21 +30,40 @@ class Library extends React.Component{
     return book
   }
 
+  updateBooks = (book,shelf) => {
+    BooksAPI.update(book,shelf)
+    BooksAPI.getAll()
+      .then((books) => {
+        this.setState(() => ({
+          books
+        }))
+      })
+  }
+
   render(){
+
     return(
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <Reading books={this.state.books} checkUndefined={this.checkUndefined}/>
-          <WantToRead books={this.state.books} checkUndefined={this.checkUndefined}/>
-          <Read books={this.state.books} checkUndefined={this.checkUndefined}/>
+          <Reading books={this.state.books}
+          checkUndefined={this.checkUndefined}
+          updateBooks={this.updateBooks}
+          />
+          <WantToRead books={this.state.books}
+          checkUndefined={this.checkUndefined}
+          updateBooks={this.updateBooks}
+          />
+          <Read books={this.state.books}
+          checkUndefined={this.checkUndefined}
+          updateBooks={this.updateBooks}
+          />
         </div>
         <Link
           className="open-search"
-          to='/add'
-        >
+          to='/add'>
           <button>Add a book</button>
         </Link>
       </div>
