@@ -1,9 +1,7 @@
 # MyReads
-React web app that tracks books that you are reading, have read, or want to read.
 
-## How To
+## How To Setup
+To get started:
 
-To get started developing right away:
-
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+* Install all project dependencies with `npm install`
+* Start the development server with `npm start`
