@@ -5,6 +5,7 @@ class Read extends React.Component{
 
   render(){
     const {checkUndefined, updateBooks} = this.props
+    //Filtering books with the correct shelf
     const books = this.props.books.filter(book =>
     book.shelf === "read" ).map((book) => (
       checkUndefined(book)

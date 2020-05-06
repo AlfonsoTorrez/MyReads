@@ -19,7 +19,7 @@ class Library extends React.Component{
         }))
       })
   }
-
+  //Handling books that do not jabe thumbnails or authors
   checkUndefined(book){
     if(typeof book.imageLinks === 'undefined'){
       book.imageLinks = {thumbnail: "https://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"}
@@ -29,7 +29,7 @@ class Library extends React.Component{
     }
     return book
   }
-
+  //Handling changes of shelfs on main page
   updateBooks = (book,shelf) => {
     BooksAPI.update(book,shelf).then(_ => {
       BooksAPI.getAll()
