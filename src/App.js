@@ -1,6 +1,6 @@
 import React from 'react'
 import Library from './Library.js'
-import AddBook from './AddBook.js'
+import Search from './Search.js'
 import {Route} from 'react-router-dom'
 import './App.css'
 
@@ -12,8 +12,8 @@ class BooksApp extends React.Component {
         <Route exact path='/'render= {() => (
           <Library/>
         )} />
-        <Route exact path='/add'render= {() => (
-          <AddBook />
+        <Route exact path='/search'render= {() => (
+          <Search />
         )} />
       </div>
     )
