@@ -4,9 +4,8 @@ import Search from './Search.js'
 import {Route} from 'react-router-dom'
 import './App.css'
 
-class BooksApp extends React.Component {
+function BooksApp(props) {
 
-  render() {
     return (
       <div className="app">
         <Route exact path='/'render= {() => (
@@ -17,7 +16,6 @@ class BooksApp extends React.Component {
         )} />
       </div>
     )
-  }
 }
 
 export default BooksApp
