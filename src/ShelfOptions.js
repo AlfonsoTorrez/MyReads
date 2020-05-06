@@ -1,18 +1,21 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 class ShelfOptions extends React.Component{
-
+  _isMounted = false;
   state = {
     shelfType: '',
   }
 
   componentDidMount(){
-    BooksAPI.get(this.props.book.id)
-      .then((book) => {
-        this.setState(() => ({
-          shelfType: book.shelf
-        }))
-      })
+    this._isMounted = true;
+      BooksAPI.get(this.props.book.id)
+        .then((book) => {
+          if(this._isMounted){
+            this.setState(() => ({
+              shelfType: book.shelf
+            }))
+          }
+        })
   }
 
   handleChange = (e) => {
@@ -23,6 +26,10 @@ class ShelfOptions extends React.Component{
     this.setState(() => ({
       shelfType: value
     }))
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   renderSwitch(){
