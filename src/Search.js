@@ -27,7 +27,7 @@ class Search extends React.Component{
             }
           })
   }
-
+  //Calling BooksAPI.update() to change books on main page
   updateBooks = (book,shelf) => {
     BooksAPI.update(book,shelf)
   }
@@ -39,7 +39,7 @@ class Search extends React.Component{
           <Link className="close-search" to='/'>
             Close
           </Link>
-          <form onChange={this.handleSubmit} >
+          <form onChange={this.handleSubmit}>
             <div className="search-books-input-wrapper">
               <input type="text" name='search' placeholder="Search by Genre"/>
             </div>
