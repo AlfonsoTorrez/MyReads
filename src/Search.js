@@ -5,7 +5,7 @@ import * as BooksAPI from './BooksAPI'
 import SearchDisplay from './SearchDisplay'
 //import { UncontrolledAlert } from 'reactstrap';
 
-class AddBook extends React.Component{
+class Search extends React.Component{
   //_isMounted = false;
 
   state = {
@@ -97,4 +97,4 @@ class AddBook extends React.Component{
   }
 }
 
-export default AddBook
+export default Search

@@ -64,7 +64,7 @@ class Library extends React.Component{
         </div>
         <Link
           className="open-search"
-          to='/add'>
+          to='/search'>
           <button>Add a book</button>
         </Link>
       </div>
