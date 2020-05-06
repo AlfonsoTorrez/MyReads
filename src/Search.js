@@ -1,74 +1,36 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-//import serializeForm from 'form-serialize'
 import * as BooksAPI from './BooksAPI'
 import SearchDisplay from './SearchDisplay'
-//import { UncontrolledAlert } from 'reactstrap';
 
 class Search extends React.Component{
-  //_isMounted = false;
 
   state = {
-    books: [],
-    emptyQuery: true,
+    books: []
   }
 
-  // componentDidMount(){
-  //   this._isMounted = true;
-  // }
-
   //Show search results if query is correct
+  //Show empty results if input is empty
   handleSubmit = (e) => {
     e.preventDefault()
-    //this._isMounted = true
-    //const value = serializeForm(e.target, { hash: true })
-    //console.log(this.x)
       BooksAPI.search(e.target.value)
         .then((books) => {
             if(typeof books === 'undefined' || books.error === "empty query"){
                 this.setState(() => ({
-                  books: [],
-                  emptyQuery: true,
+                  books: []
                 }))
             }
             else{
                 this.setState(() => ({
-                  books,
-                  emptyQuery: false,
+                  books
                 }))
             }
           })
   }
-  // //Remove search display if input becomes empty
-  // emptySearch = (e) => {
-  //   if(e.target.value === ''){
-  //     //console.log("hey")
-  //     this.setState(_ => ({
-  //       books: [],
-  //       emptyQuery: true,
-  //     }))
-  //     return false
-  //   }
-  //   return true
-  // }
 
   updateBooks = (book,shelf) => {
     BooksAPI.update(book,shelf)
   }
-
-  // dealWithInput = (e) =>{
-  //   if(this.emptySearch(e)){
-  //       this.handleSubmit(e)
-  //     }
-  // }
-  // componentWillUnmount(){
-  //   this._isMounted = false;
-  // }
-
-  //TODO:: Work on Alert
-  // <UncontrolledAlert color="danger">
-  //   No books found with that keyword
-  // </UncontrolledAlert>
 
   render(){
     return(
@@ -83,15 +45,7 @@ class Search extends React.Component{
             </div>
           </form>
         </div>
-        {
-          this.state.empty?
-              <div>
-              </div>
-            : <SearchDisplay
-            books={this.state.books}
-            updateBooks={this.updateBooks}
-            />
-        }
+        <SearchDisplay books={this.state.books} updateBooks={this.updateBooks}/>
       </div>
     )
   }
